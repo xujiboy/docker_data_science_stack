@@ -18,9 +18,9 @@ build_ds_basic%: python_data_science_basic%
 run_ds_basic%: 
 	mkdir -p proj/ds_basic$*/notebooks
 	cd proj/ds_basic$*/
-	docker run -it \
+	docker run -i -t \
 		-p $(port):8888 -d \
 		-v notebooks:/notebooks \
-		xujiboy/python_data_science_basic$*
+		xujiboy/python_data_science_basic$*:v$(version)
 
 	

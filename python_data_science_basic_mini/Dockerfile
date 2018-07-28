@@ -2,16 +2,16 @@
 FROM continuumio/miniconda3
 
 # File structure management
-RUN ["mkdir", "notebooks", "env_files"]
+RUN ["mkdir", "notebooks" ]
 COPY jupyter_notebook_config.py /root/.jupyter/
 COPY run_jupyter.sh /
-COPY data_science_basic_2.yaml /env_files/env.yml
+COPY requirement.txt /
 
 # Updating repository sources and install packages thru conda
 RUN apt-get update && apt-get install -y git && \
     rm -rf /var/lib/apt/lists/* && \
     /opt/conda/bin/conda update -n base conda && \
-    /opt/conda/bin/conda env create -f /env_files/env.yml
+    /opt/conda/bin/conda install --file=/requirement.txt -y
 
 # Jupyter ports
 EXPOSE 8000
