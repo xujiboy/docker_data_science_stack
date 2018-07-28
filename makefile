@@ -1,15 +1,19 @@
-# exposed port for listening
+# versioning
+version ?= 1.0
+
+# exposed port for jupyter notebook listening
 port ?= 8000
 
 # phony targets
-build: build_ds_basic_1 build_ds_basic_2
-run1: run_ds_basic_1
-run2: run_ds_basic_2
+build_mini: build_ds_basic_mini
+build_ana: build_ds_basic_ana
+run_mini: run_ds_basic_mini
+run_ana: run_ds_basic_ana
 
 build_ds_basic%: python_data_science_basic%
 	docker build ./$^ \
 		-f $^/Dockerfile \
-		-t xujiboy/$^
+		-t xujiboy/$^:v$(version)
 
 run_ds_basic%: 
 	mkdir -p proj/ds_basic$*/notebooks
