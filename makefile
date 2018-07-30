@@ -1,3 +1,6 @@
+# author namespace on DockerHub
+name := xujiboy
+
 # versioning
 version ?= 1.1
 
@@ -14,7 +17,7 @@ run_ana: run_ds_basic_ana
 build_ds_basic%: python_data_science_basic%
 	docker build ./$^ \
 		-f $^/Dockerfile \
-		-t xujiboy/$^:v$(version)
+		-t $(name)/$^:v$(version)
 
 # create containers to run docker images
 run_ds_basic%: 
@@ -22,7 +25,7 @@ run_ds_basic%:
 	docker run -i -t \
 		-p $(port):8888 -d \
 		-v $(PWD)/proj/ds_basic$*/notebooks:/notebooks \
-		xujiboy/python_data_science_basic$*:v$(version)
+		$(name)/python_data_science_basic$*:v$(version)
 
 clean: clean_proj clean_container
 
