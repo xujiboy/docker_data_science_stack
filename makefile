@@ -24,7 +24,14 @@ run_ds_basic%:
 		-v $(PWD)/proj/ds_basic$*/notebooks:/notebooks \
 		xujiboy/python_data_science_basic$*:v$(version)
 
-clean:
+clean: clean_proj clean_container
+
+clean_proj:
 	rm -rf proj
 
+clean_container:
+	@echo these containers are still running and hence not removed:
+	@echo $(shell docker container list -q)
+	docker container prune -f
+	docker ps -a
 	
