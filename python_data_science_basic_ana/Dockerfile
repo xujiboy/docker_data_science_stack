@@ -12,11 +12,5 @@ RUN ["mkdir", "notebooks"]
 COPY jupyter_notebook_config.py /root/.jupyter/
 COPY run_jupyter.sh /
 
-# Jupyter and Tensorboard ports
-EXPOSE 8000
-
-# Store notebooks in this mounted directory
-VOLUME /notebooks
-
 # Running jupyter notebook
 CMD ["/run_jupyter.sh"]
